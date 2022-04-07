@@ -5,6 +5,7 @@ class Helper:
 
     @staticmethod
     def clear_screen():
+        """To clear the screen when playing in terminal"""
         if os.name == 'nt':
             os.system('cls')
         else:

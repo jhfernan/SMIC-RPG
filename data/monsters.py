@@ -2,8 +2,8 @@ from random import choice
 from data.characters import Monster
 
 # Monsters have a general stat breakdown of the following:
-# 16 total stat points for best monsters
-# 12 for average total stats
+# 12 total stat points for best monsters
+# 10 for average total stats
 # 8 for the lower units
 
 
@@ -26,7 +26,7 @@ class Zombie(Monster):
 class SpineLauncher(Monster):
 
     def __init__(self, level):
-        super().__init__(level=level, health=6.5, attack=5.5, defense=level, name='Spine Launcher')
+        super().__init__(level=level, health=5.5, attack=4.5, defense=level, name='Spine Launcher')
 
     def attack_one(self, amount_of_attacks=2):
         result = f"Spine Launcher fires {amount_of_attacks} spikes towards you!"

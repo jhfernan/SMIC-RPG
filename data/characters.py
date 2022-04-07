@@ -7,11 +7,11 @@ class Character:
     def __init__(self, **kwargs):
         self.level = kwargs.get('level') if kwargs.get('level') else 1
         self.name = kwargs.get('name') or 'character'
-        self.health = ceil(kwargs.get('health') * self.level) if kwargs.get('health') else 7
+        self.health = self.set_stat(self.level, kwargs.get('health'), 7)
         self.current_health = self.health
-        self.attack = ceil(kwargs.get('attack') * self.level) if kwargs.get('attack') else 4
+        self.attack = self.set_stat(self.level, kwargs.get('attack'), 4)
         self.current_attack = self.attack
-        self.defense = ceil(kwargs.get('defense') * self.level) if kwargs.get('defense') else 0
+        self.defense = self.set_stat(self.level, kwargs.get('defense'), 0)
         self.current_defense = self.defense
 
     def attack_one(self):
@@ -34,7 +34,7 @@ class Character:
         return self.result_string(result, 0)
 
     def gets_hit(self, damage):
-        total = damage - self.defense
+        total = damage - self.current_defense
         if total < 0:
             total = 0
         elif total > 0 and self.attack_roll() > 95:
@@ -51,6 +51,13 @@ class Character:
     def result_string(results, total):
         print(results)
         return total
+
+    @staticmethod
+    def set_stat(level, stat, default_stat):
+        if stat:
+            return ceil(stat * level)
+        else:
+            return ceil(default_stat * level)
 
 
 class Monster(Character):
@@ -78,8 +85,8 @@ class Player(Character):
         self.spirit_current = 0
         self.spirit_regen = kwargs.get('spirit_regen') or 2
         self.experience = 0
-        self.attack_two_requirement = kwargs.get('attack_two_requirement') or 2
-        self.attack_three_requirement = kwargs.get('attack_three_requirement') or 3
+        self.atk_two_req = kwargs.get('atk_two_req') or 2
+        self.atk_three_req = kwargs.get('atk_three_req') or 3
 
     def refresh_spirit(self):
         print(f"The player regenerates {self.spirit_regen} spirit points")

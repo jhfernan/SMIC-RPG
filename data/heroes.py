@@ -35,7 +35,7 @@ class Assassin(Player):
 
     def __init__(self, level=1):
         super().__init__(level=level,
-                         health=4,
+                         health=5,
                          attack=6,
                          def_chance=60,
                          spirit=4,
